@@ -8,7 +8,7 @@ class WorldTime {
   String time;
   String flag; //url to an asset flag icon
   String url; //location url for API endpoint
-  bool isDayTime; //true or false if daytime or not
+  String bgImageBasedOnTime; //set background image based on the time of day
 
   WorldTime({this.location, this.flag, this.url});
 
@@ -24,7 +24,18 @@ class WorldTime {
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(hours: int.parse(offset)));
 
-      isDayTime = now.hour > 6 && now.hour < 20 ? true : false;
+      // isDayTime = now.hour > 6 && now.hour < 20 ? true : false;
+      int temp = now.hour;
+      print('Time hour is : $temp');
+      if (now.hour >= 1 && now.hour < 12) {
+        bgImageBasedOnTime = "day.jpg";
+      } else if (now.hour >= 12 && now.hour < 16) {
+        bgImageBasedOnTime = "afternoon.jpg";
+      } else if (now.hour >= 16 && now.hour < 21) {
+        bgImageBasedOnTime = "evening.jpg";
+      } else if (now.hour >= 21 && now.hour <= 24) {
+        bgImageBasedOnTime = "night.jpg";
+      }
 
       //set the time property
       time = DateFormat.jm().format(now);

@@ -12,8 +12,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
 
-    String bgImage = data['isDayTime'] ? 'day.jpg' : 'night.jpg';
-    Color bgColor = data['isDayTime'] ? Colors.blue : Colors.indigo[700];
+    String bgImage = data['bgImageBasedOnTime'];
+    Color bgColor = Colors.blue;
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
                         data = {
                           'time': result['time'],
                           'location': result['location'],
-                          'isDayTime': result['isDayTime'],
+                          'bgImageBasedOnTime': result['bgImageBasedOnTime'],
                           'flag': result['flag']
                         };
                       });
